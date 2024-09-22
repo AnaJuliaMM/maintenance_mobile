@@ -1,4 +1,6 @@
-export const MACHINES = [
+import { MachineType } from "./types";
+
+export const MACHINES: MachineType[]= [
     {
         "name": "CNC Router A200",
         "type": "CNC Machine",
