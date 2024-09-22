@@ -45,8 +45,8 @@ const CustomTable = ({
     <Table aria-labelledby="invoice-table">
       <TableHeader>
         <TableRow>
-          {columns.map((item) => (
-            <TableHead style={{ width: columnWidths[0] }}>
+          {columns.map((item, index) => (
+            <TableHead key={index} style={{ width: columnWidths[0] }}>
               <Text>{item}</Text>
             </TableHead>
           ))}
