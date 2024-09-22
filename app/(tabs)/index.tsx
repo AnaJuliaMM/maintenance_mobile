@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  Alert,
-  ScrollView,
-  Text,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { ScrollView } from "react-native";
 
 // External Package imports
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -16,7 +10,6 @@ import CustomTable from "~/components/custom/CustomTable";
 
 // Mock data imports
 import { MACHINES } from "~/lib/mock_data";
-import { PiWashingMachine } from "react-icons/pi";
 
 export default function Example() {
   return (

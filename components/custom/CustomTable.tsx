@@ -1,13 +1,11 @@
 import React from "react";
 import { Alert, ScrollView, View, useWindowDimensions } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 // Utils imports
 import { cn } from "~/lib/utils";
 import { MachineType } from "~/lib/types";
-
-// External Package imports
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { router } from "expo-router";
 
 // React Native Reusables components imports
 import {
@@ -31,7 +29,7 @@ const CustomTable = ({
   rows,
   columns,
   min_column_widths,
-  onPressRow
+  onPressRow,
 }: CustomTableProps) => {
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
