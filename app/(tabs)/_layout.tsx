@@ -1,18 +1,19 @@
-import { Tabs } from "expo-router";
-import Feather from "@expo/vector-icons/Feather";
-
-// External Package imports
-import { PiWashingMachine } from "react-icons/pi";
-
+import * as React from "react";
 import "~/global.css";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Theme, ThemeProvider } from "@react-navigation/native";
+import { Tabs } from "expo-router";
 import { Stack } from "expo-router/stack";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
 import { Platform } from "react-native";
+
+// External Package imports
+import Feather from "@expo/vector-icons/Feather";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Theme, ThemeProvider } from "@react-navigation/native";
+
+// Utils imports
 import { NAV_THEME } from "~/lib/constants";
 import { useColorScheme } from "~/lib/useColorScheme";
 import { PortalHost } from "@rn-primitives/portal";
@@ -79,7 +80,27 @@ export default function TabLayout() {
           options={{
             title: "Machines",
             tabBarIcon: ({ color }) => (
-              <Feather name="list" size={24} color={color} />
+              <Feather name="list" size={20} color={color} />
+            ),
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Tabs.Screen
+          name="maintenance"
+          options={{
+            title: "Manutenções",
+            tabBarIcon: ({ color }) => (
+              <FontAwesome5 name="history" size={18} color={color} />
+            ),
+            headerRight: () => <ThemeToggle />,
+          }}
+        />
+        <Tabs.Screen
+          name="stock"
+          options={{
+            title: "Estoque",
+            tabBarIcon: ({ color }) => (
+              <FontAwesome5 name="tools" size={18} color={color} />
             ),
             headerRight: () => <ThemeToggle />,
           }}
