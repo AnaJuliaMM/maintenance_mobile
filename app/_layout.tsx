@@ -1,12 +1,18 @@
+import * as React from "react";
 import "~/global.css";
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Theme, ThemeProvider } from "@react-navigation/native";
-import { Stack } from "expo-router/stack";
+import { Tabs } from "expo-router";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import * as React from "react";
 import { Platform } from "react-native";
+
+// External Package imports
+import Feather from "@expo/vector-icons/Feather";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Theme, ThemeProvider } from "@react-navigation/native";
+
+// Utils imports
 import { NAV_THEME } from "~/lib/constants";
 import { useColorScheme } from "~/lib/useColorScheme";
 import { PortalHost } from "@rn-primitives/portal";
@@ -30,7 +36,7 @@ export {
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+export default function TabLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
@@ -67,22 +73,38 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <Stack>
-        <Stack.Screen
-          name="(tabs)"
+      <Tabs screenOptions={{ tabBarActiveTintColor: "#FF00C4" }}>
+        <Tabs.Screen
+          name="machine"
           options={{
             title: "Máquinas",
-            headerShown: false,
             headerRight: () => <ThemeToggle />,
+            tabBarIcon: ({ color }) => (
+              <Feather name="list" size={20} color={color} />
+            ),
           }}
         />
-        <Stack.Screen
-          name="(modals)/machineModal"
+        <Tabs.Screen
+          name="maintenance/index"
           options={{
-            presentation: "modal",
+            title: "Manutenções",
+            headerRight: () => <ThemeToggle />,
+            tabBarIcon: ({ color }) => (
+              <FontAwesome5 name="history" size={18} color={color} />
+            ),
           }}
         />
-      </Stack>
+        <Tabs.Screen
+          name="stock/index"
+          options={{
+            title: "Estoque",
+            headerRight: () => <ThemeToggle />,
+            tabBarIcon: ({ color }) => (
+              <FontAwesome5 name="tools" size={18} color={color} />
+            ),
+          }}
+        />
+      </Tabs>
       <PortalHost />
     </ThemeProvider>
   );

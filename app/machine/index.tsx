@@ -12,6 +12,20 @@ import CustomTable from "~/components/custom/CustomTable";
 import { MACHINES } from "~/lib/mock_data";
 
 export default function Example() {
+
+  /**
+ * Navega para a página de detalhes da máquina com base no ID fornecido.
+ *
+ * @param {string} id - O identificador único da máquina.
+ * 
+ * A função utiliza o roteador para redirecionar o usuário para a página de
+ * detalhes de uma máquina específica. A página de destino é definida por
+ * "/machine/[id]" e o ID da máquina é passado como parâmetro de rota.
+ */
+  const handlePressRow = (id: string) => {
+    router.navigate({ pathname: "/machine/[id]", params: { id: id } });
+  };
+
   return (
     <ScrollView
       alwaysBounceVertical={true}
@@ -22,10 +36,10 @@ export default function Example() {
         rows={MACHINES}
         columns={["Nome", "Tipo", "Localização"]}
         min_column_widths={[20, 20, 20]}
-        onPressRow={() => {
-          router.navigate("/machineModal");
-        }}
+        onPressRow={handlePressRow}
       />
     </ScrollView>
   );
 }
+
+//  router.navigate("/machineModal");
