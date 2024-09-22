@@ -78,7 +78,7 @@ export default function TabLayout() {
           name="machine"
           options={{
             title: "Máquinas",
-            headerRight: () => <ThemeToggle />,
+            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Feather name="list" size={20} color={color} />
             ),
