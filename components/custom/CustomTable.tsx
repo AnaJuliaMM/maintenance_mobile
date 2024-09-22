@@ -22,7 +22,7 @@ interface CustomTableProps {
   rows: MachineType[];
   columns: string[];
   min_column_widths: number[];
-  onPressRow: () => void;
+  onPressRow: (id: string) => void;
 }
 
 const CustomTable = ({
@@ -57,7 +57,7 @@ const CustomTable = ({
           <TableRow
             key={item.serialNumber}
             className={cn("active:bg-secondary", 20 % 2 && "bg-muted/40 ")}
-            onPress={onPressRow}
+            onPress={() => onPressRow(item.serialNumber)}
           >
             <TableCell style={{ width: columnWidths[0] }}>
               <Text>{item.name}</Text>
