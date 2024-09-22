@@ -58,6 +58,7 @@ const CustomTable = ({
           <TableRow
             key={item.serialNumber}
             className={cn("active:bg-secondary", 20 % 2 && "bg-muted/40 ")}
+            onPress={() => {Alert.alert("deu certo, Senhor!");}}
           >
             <TableCell style={{ width: columnWidths[0] }}>
               <Text>{item.name}</Text>
