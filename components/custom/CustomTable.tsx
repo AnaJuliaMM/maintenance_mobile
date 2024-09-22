@@ -7,14 +7,13 @@ import { MachineType } from "~/lib/types";
 
 // External Package imports
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 // React Native Reusables components imports
-import { Button } from "~/components/ui/button";
 import {
   Table,
   TableBody,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -25,12 +24,14 @@ interface CustomTableProps {
   rows: MachineType[];
   columns: string[];
   min_column_widths: number[];
+  onPressRow: () => void;
 }
 
 const CustomTable = ({
   rows,
   columns,
   min_column_widths,
+  onPressRow
 }: CustomTableProps) => {
   const { width } = useWindowDimensions();
   const insets = useSafeAreaInsets();
@@ -58,7 +59,7 @@ const CustomTable = ({
           <TableRow
             key={item.serialNumber}
             className={cn("active:bg-secondary", 20 % 2 && "bg-muted/40 ")}
-            onPress={() => {Alert.alert("deu certo, Senhor!");}}
+            onPress={onPressRow}
           >
             <TableCell style={{ width: columnWidths[0] }}>
               <Text>{item.name}</Text>
