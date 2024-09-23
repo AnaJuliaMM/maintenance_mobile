@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image } from "react-native";
+import { ScrollView, Image, View } from "react-native";
 
 // Utils
 import { MaintenanceType } from "~/lib/types";
@@ -24,11 +24,17 @@ import { MAINTENANCES } from "~/lib/mock_data";
  * @returns JSX.Element A tela de detalhes da máquina.
  */
 export default function DetalhesManutencao() {
-   const maintenance:MaintenanceType = MAINTENANCES[0];
-   const [value, setValue] = React.useState('');
+  const maintenance: MaintenanceType = MAINTENANCES[0];
+  const [value, setValue] = React.useState("");
 
   return (
-    <View style={{ padding: 20 }}>
+    <ScrollView
+      alwaysBounceVertical={true}
+      bounces={false}
+      showsHorizontalScrollIndicator={false}
+      className="p-4"
+
+    >
       <CustomCard
         title={maintenance.title}
         description={maintenance.description}
@@ -38,17 +44,29 @@ export default function DetalhesManutencao() {
       </CustomCard>
 
       <View className="flex gap-8 pt-8">
-        <Text className="font-bold text-xl">Comentários</Text>
+        <Text className="font-bold text-xl">Detalhes</Text>
+        <Text className="font-bold text-md">Lista de Recursos</Text>
         <Textarea
-        placeholder='Adicione comentários'
-        value={value}
-        onChangeText={setValue}
-        aria-labelledby='textareaLabel'
-      />
-      <Button className="bg-blue-500">
-        <Text>Enviar</Text>
-      </Button>
+          placeholder="Lista de Recursos"
+          value={value}
+          onChangeText={setValue}
+          aria-labelledby="textareaLabel"
+        />
+        <Button className="bg-blue-500">
+          <Text>Enviar</Text>
+        </Button>
+        <Text className="font-bold text-md">Comentário</Text>
+
+        <Textarea
+          placeholder="Adicione comentários"
+          value={value}
+          onChangeText={setValue}
+          aria-labelledby="textareaLabel"
+        />
+        <Button className="bg-blue-500">
+          <Text>Enviar</Text>
+        </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 }
