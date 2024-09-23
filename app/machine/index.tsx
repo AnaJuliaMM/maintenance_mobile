@@ -2,7 +2,6 @@ import * as React from "react";
 import { ScrollView } from "react-native";
 
 // External Package imports
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router } from "expo-router";
 
 // Custom components imports
@@ -35,7 +34,8 @@ export default function Example() {
       <CustomTable
         rows={MACHINES}
         columns={["Nome", "Tipo", "Localização"]}
-        min_column_widths={[20, 20, 20]}
+        keys={["serialNumber", "name", "type", "location"]}
+        min_column_widths={[40, 10, 10]}
         onPressRow={handlePressRow}
       />
     </ScrollView>

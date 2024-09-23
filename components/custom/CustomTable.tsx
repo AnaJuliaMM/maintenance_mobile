@@ -1,11 +1,10 @@
 import React from "react";
-import { Alert, ScrollView, View, useWindowDimensions } from "react-native";
+import { useWindowDimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { router } from "expo-router";
 
 // Utils imports
 import { cn } from "~/lib/utils";
-import { MachineType } from "~/lib/types";
+import { MachineType, MaintenanceType } from "~/lib/types";
 
 // React Native Reusables components imports
 import {
@@ -19,8 +18,9 @@ import {
 import { Text } from "~/components/ui/text";
 
 interface CustomTableProps {
-  rows: MachineType[];
+  rows: MachineType[] | MaintenanceType[];
   columns: string[];
+  keys: (keyof MachineType)[] | (keyof MaintenanceType)[];
   min_column_widths: number[];
   onPressRow: (id: string) => void;
 }
@@ -28,6 +28,7 @@ interface CustomTableProps {
 const CustomTable = ({
   rows,
   columns,
+  keys,
   min_column_widths,
   onPressRow,
 }: CustomTableProps) => {
@@ -53,20 +54,20 @@ const CustomTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {rows.map((item) => (
+        {rows.map((item, index) => (
           <TableRow
-            key={item.serialNumber}
+            key={index}
             className={cn("active:bg-secondary", 20 % 2 && "bg-muted/40 ")}
             onPress={() => onPressRow(item.serialNumber)}
           >
             <TableCell style={{ width: columnWidths[0] }}>
-              <Text>{item.name}</Text>
+              <Text>{item[keys[1]]}</Text>
             </TableCell>
             <TableCell style={{ width: columnWidths[1] }}>
-              <Text>{item.type}</Text>
+              <Text>{item[keys[2]]}</Text>
             </TableCell>
             <TableCell style={{ width: columnWidths[2] }}>
-              <Text>{item.location}</Text>
+              <Text>{item[keys[3]]}</Text>
             </TableCell>
           </TableRow>
         ))}
