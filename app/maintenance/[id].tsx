@@ -24,7 +24,9 @@ import { MAINTENANCES } from "~/lib/mock_data";
  * @returns JSX.Element A tela de detalhes da máquina.
  */
 export default function DetalhesManutencao() {
+  // Armazena um objeto do tipo manutencao
   const maintenance: MaintenanceType = MAINTENANCES[0];
+  // Estado local para armazenar um valor de texto.
   const [value, setValue] = React.useState("");
 
   return (
@@ -33,7 +35,6 @@ export default function DetalhesManutencao() {
       bounces={false}
       showsHorizontalScrollIndicator={false}
       className="p-4"
-
     >
       <CustomCard
         title={maintenance.title}

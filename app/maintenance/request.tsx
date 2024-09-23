@@ -8,9 +8,25 @@ import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
 
-export default function RequestForm() {
+/**
+ * Componente `RequestForm` que exibe um formulário de solicitação.
+ * 
+ * O formulário contém campos de entrada para a prioridade, equipe, e descrição,
+ * além de um botão para enviar uma nova solicitação.
+ */
+export default function RequisicaoForm() {
+  // Estado local para armazenar um valor de texto.
   const [value, setValue] = React.useState("");
 
+  /**
+   * Função para atualizar o estado do valor de texto.
+   *
+   * @param {string} text - O novo valor de texto inserido pelo usuário.
+   *
+   * A função é chamada sempre que o texto em um campo de entrada é alterado.
+   * Ela atualiza o estado `value` com o novo texto digitado, utilizando o
+   * `setValue` para armazená-lo.
+   */
   const onChangeText = (text: string) => {
     setValue(text);
   };
@@ -52,8 +68,6 @@ export default function RequestForm() {
       <Button className="bg-pink-600">
         <Text>Nova Solicitação</Text>
       </Button>
-
- 
     </View>
   );
 }

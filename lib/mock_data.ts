@@ -407,3 +407,4 @@ export const INVENTORY: InventoryItemType[] = [
     status: "em uso",
   },
 ];
+

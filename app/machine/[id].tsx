@@ -16,7 +16,6 @@ import CustomTable from "~/components/custom/CustomTable";
 // Mock data
 import { MACHINES } from "~/lib/mock_data";
 import { MAINTENANCES } from "~/lib/mock_data";
-import { INVENTORY } from "~/lib/mock_data";
 
 /**
  * Tela que exibe os detalhes de uma máquina com base no ID fornecido na URL.
@@ -27,7 +26,9 @@ import { INVENTORY } from "~/lib/mock_data";
  * @returns JSX.Element A tela de detalhes da máquina.
  */
 export default function DetalhesMaquina() {
+  // Estado local para controlar se um checkbox está marcado ou não.
   const [checked, setChecked] = React.useState(false);
+  // Estado local para armazenar um valor de texto.
   const [value, setValue] = React.useState("");
 
   // Obtém o ID da máquina a partir dos parâmetros da rota.
@@ -71,11 +72,11 @@ export default function DetalhesMaquina() {
       <View className="flex flex-1 flex-col p-2 pt-8">
         <Text className="text-2xl font-bold">Manutenções Recentes</Text>
         <CustomTable
-            rows={MAINTENANCES}
-            columns={["Nome", "Data", "Status"]}
-            keys={["code", "title", "requisitionDate", "status"]}
-            min_column_widths={[40, 10, 10]}
-          />
+          rows={MAINTENANCES}
+          columns={["Nome", "Data", "Status"]}
+          keys={["code", "title", "requisitionDate", "status"]}
+          min_column_widths={[40, 10, 10]}
+        />
       </View>
 
       <View className="flex flex-1 gap-8 pt-8">

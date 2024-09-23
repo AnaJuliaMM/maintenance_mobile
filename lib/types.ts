@@ -29,3 +29,10 @@ export type InventoryItemType = {
   acquisitionDate: string;
   status: "disponível" | "em uso" | "em manutenção";
 };
+
+export type TeamType = {
+  code: string;
+  name: string;
+  members: string[]
+  is_avaiable: boolean;
+};
