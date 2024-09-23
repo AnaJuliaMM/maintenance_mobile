@@ -75,14 +75,22 @@ export default function MaquinasLayout() {
         <Stack.Screen
           name="index"
           options={{
-            title: "Máquinas",
+            title: "Solicitações",
             headerRight: () => <ThemeToggle />,
           }}
         />
         <Stack.Screen
           name="[id]"
           options={{
-            title: "Detalhes da Máquina",
+            title: "Detalhes da Solicitação",
+            presentation: "modal",
+            headerRight: () => <ThemeToggle />
+          }}
+        />
+        <Stack.Screen
+          name="request"
+          options={{
+            title: "Nova Solicitação",
             presentation: "modal",
             headerRight: () => <ThemeToggle />
           }}

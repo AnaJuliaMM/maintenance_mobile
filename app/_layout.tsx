@@ -9,6 +9,7 @@ import { Platform } from "react-native";
 // External Package imports
 import Feather from "@expo/vector-icons/Feather";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Theme, ThemeProvider } from "@react-navigation/native";
 
@@ -85,17 +86,17 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="maintenance/index"
+          name="maintenance"
           options={{
-            title: "Manutenções",
-            headerRight: () => <ThemeToggle />,
+            title: "Solicitações",
+            headerShown: false,
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="history" size={18} color={color} />
             ),
           }}
         />
         <Tabs.Screen
-          name="stock/index"
+          name="inventory/index"
           options={{
             title: "Estoque",
             headerRight: () => <ThemeToggle />,

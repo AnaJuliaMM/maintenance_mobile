@@ -18,3 +18,21 @@ export type MaintenanceType = {
   priority: string;
   responsableTeam: string
 };
+
+export type InventoryItemType = {
+  id: string;
+  name: string;
+  type: "ferramenta" | "peça";
+  quantity: number;
+  location: string;
+  supplier: string;
+  acquisitionDate: string;
+  status: "disponível" | "em uso" | "em manutenção";
+};
+
+export type TeamType = {
+  code: string;
+  name: string;
+  members: string[]
+  is_avaiable: boolean;
+};
