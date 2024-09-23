@@ -1,7 +1,7 @@
 import * as React from "react";
 import "~/global.css";
 
-import { Tabs } from "expo-router";
+import { Stack } from "expo-router";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Platform } from "react-native";
@@ -36,7 +36,7 @@ export {
 // Prevent the splash screen from auto-hiding before getting the color scheme.
 SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout() {
+export default function MaquinasLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
 
@@ -73,38 +73,23 @@ export default function TabLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <Tabs screenOptions={{ tabBarActiveTintColor: "#FF00C4" }}>
-        <Tabs.Screen
-          name="machine"
+      <Stack>
+        <Stack.Screen
+          name="index"
           options={{
             title: "Máquinas",
-            headerShown: false,
-            tabBarIcon: ({ color }) => (
-              <Feather name="list" size={20} color={color} />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="maintenance/index"
-          options={{
-            title: "Manutenções",
             headerRight: () => <ThemeToggle />,
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="history" size={18} color={color} />
-            ),
           }}
         />
-        <Tabs.Screen
-          name="stock/index"
+        <Stack.Screen
+          name="[id]"
           options={{
-            title: "Estoque",
-            headerRight: () => <ThemeToggle />,
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="tools" size={18} color={color} />
-            ),
+            title: "Detalhes da Máquina",
+            presentation: "modal",
+            headerRight: () => <ThemeToggle />
           }}
         />
-      </Tabs>
+      </Stack>
       <PortalHost />
     </ThemeProvider>
   );
