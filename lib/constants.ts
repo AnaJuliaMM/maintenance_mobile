@@ -8,7 +8,7 @@ export const NAV_THEME = {
     text: 'hsl(240 10% 3.9%)', // foreground
   },
   dark: {
-    background: 'hsl(222 71% 4%)', // background
+    background: 'hsl(210 67% 4%)', // background
     border: 'hsl(240 3.7% 15.9%)', // border
     card: 'hsl(240 10% 3.9%)', // card
     notification: 'hsl(0 72% 51%)', // destructive
@@ -16,4 +16,3 @@ export const NAV_THEME = {
     text: 'hsl(0 0% 98%)', // foreground
   },
 };
-
