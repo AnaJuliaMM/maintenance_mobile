@@ -25,7 +25,7 @@ export default function MaintenanceScreen() {
    * "/machine/[id]" e o ID da máquina é passado como parâmetro de rota.
    */
   const handlePressRow = (id: string) => {
-    router.navigate({ pathname: "/maintenance[id]", params: { id: id } });
+    router.navigate("/maintenance/id");
   };
 
   /**
@@ -54,6 +54,7 @@ export default function MaintenanceScreen() {
             columns={["Nome", "Data", "Status"]}
             keys={["code", "title", "requisitionDate", "status"]}
             min_column_widths={[40, 10, 10]}
+            onPressRow={handlePressRow}
           />
         </View>
       </ScrollView>

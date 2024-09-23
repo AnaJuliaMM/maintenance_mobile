@@ -80,6 +80,14 @@ export default function MaquinasLayout() {
           }}
         />
         <Stack.Screen
+          name="[id]"
+          options={{
+            title: "Detalhes da Solicitação",
+            presentation: "modal",
+            headerRight: () => <ThemeToggle />
+          }}
+        />
+        <Stack.Screen
           name="request"
           options={{
             title: "Nova Solicitação",
