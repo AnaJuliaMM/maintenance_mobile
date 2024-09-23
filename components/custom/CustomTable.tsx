@@ -18,11 +18,11 @@ import {
 import { Text } from "~/components/ui/text";
 
 interface CustomTableProps {
-  rows: MachineType[] | MaintenanceType[];
+  rows: any[];
   columns: string[];
-  keys: (keyof MachineType)[] | (keyof MaintenanceType)[];
+  keys: any[];
   min_column_widths: number[];
-  onPressRow: (id: string) => void;
+  onPressRow?: (id: string) => void;
 }
 
 const CustomTable = ({
@@ -58,7 +58,7 @@ const CustomTable = ({
           <TableRow
             key={index}
             className={cn("active:bg-secondary", 20 % 2 && "bg-muted/40 ")}
-            onPress={() => onPressRow(item.serialNumber)}
+            onPress={() => onPressRow && onPressRow(item.serialNumber)}
           >
             <TableCell style={{ width: columnWidths[0] }}>
               <Text>{item[keys[1]]}</Text>
