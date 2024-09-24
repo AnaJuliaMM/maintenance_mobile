@@ -8,9 +8,12 @@ import { Text } from "~/components/ui/text";
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
 
+// Custom components imports
+import { CustomSelect } from "~/components/custom/CustomSelect";
+
 /**
  * Componente `RequestForm` que exibe um formulário de solicitação.
- * 
+ *
  * O formulário contém campos de entrada para a prioridade, equipe, e descrição,
  * além de um botão para enviar uma nova solicitação.
  */
@@ -32,27 +35,15 @@ export default function RequisicaoForm() {
   };
 
   return (
-    <View className="flex flex-col gap-4 p-4">
+    <View className="flex gap-4 p-4">
       <View className="flex flex-col gap-4">
         <Label nativeID="airplane-mode">Prioridade</Label>
-        <Input
-          placeholder="Write some stuff..."
-          value={value}
-          onChangeText={onChangeText}
-          aria-labelledby="inputLabel"
-          aria-errormessage="inputError"
-        />
+        <CustomSelect options={["Alta", "Média", "Baixa"]} />
       </View>
 
-      <View className="flex flex-col gap-4">
+      <View className="flex gap-4">
         <Label nativeID="airplane-mode">Equipe</Label>
-        <Input
-          placeholder="Write some stuff..."
-          value={value}
-          onChangeText={onChangeText}
-          aria-labelledby="inputLabel"
-          aria-errormessage="inputError"
-        />
+        <CustomSelect options={["Equipe 1", "Equipe 2", "Equipe 3"]} />
       </View>
 
       <View className="flex flex-col gap-4">

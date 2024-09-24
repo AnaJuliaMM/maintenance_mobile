@@ -11,6 +11,7 @@ import { Button } from "~/components/ui/button";
 
 // Custom components imports
 import CustomCard from "~/components/custom/CustomCard";
+import { CustomSelect } from "~/components/custom/CustomSelect";
 
 // Mock data
 import { MAINTENANCES } from "~/lib/mock_data";
@@ -36,6 +37,17 @@ export default function DetalhesManutencao() {
       showsHorizontalScrollIndicator={false}
       className="p-4"
     >
+      <View className="flex-row items-center gap-2 justify-between w-full p-4 pb-8">
+        <Text
+        className="text-xl"
+        >
+          Status
+        </Text>
+        <CustomSelect
+          options={["Pendente", "Em andamento", "Finalizada"]}
+
+        />
+      </View>
       <CustomCard
         title={maintenance.title}
         description={maintenance.description}
