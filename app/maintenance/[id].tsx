@@ -57,18 +57,18 @@ export default function DetalhesManutencao() {
       </CustomCard>
 
       <View className="flex gap-8 pt-8">
-        <Text className="font-bold text-xl">Detalhes</Text>
-        <Text className="font-bold text-md">Lista de Recursos</Text>
+        <Text className="font-bold text-2xl">Detalhes</Text>
+        <Text className="font-bold text-xl">Lista de Recursos</Text>
         <Textarea
           placeholder="Lista de Recursos"
           value={value}
           onChangeText={setValue}
           aria-labelledby="textareaLabel"
         />
-        <Button className="bg-blue-500">
+        <Button className="bg-green-500">
           <Text>Enviar</Text>
         </Button>
-        <Text className="font-bold text-md">Comentário</Text>
+        <Text className="font-bold text-xl">Comentário</Text>
 
         <Textarea
           placeholder="Adicione comentários"
@@ -76,7 +76,7 @@ export default function DetalhesManutencao() {
           onChangeText={setValue}
           aria-labelledby="textareaLabel"
         />
-        <Button className="bg-blue-500">
+        <Button className="bg-green-500">
           <Text>Enviar</Text>
         </Button>
       </View>
