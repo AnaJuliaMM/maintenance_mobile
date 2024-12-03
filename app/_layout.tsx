@@ -1,7 +1,7 @@
 import * as React from "react";
 import "~/global.css";
 
-import { Tabs } from "expo-router";
+import { Stack } from "expo-router";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Platform } from "react-native";
@@ -19,6 +19,8 @@ import { useColorScheme } from "~/lib/useColorScheme";
 import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
+
+import Login from "./login";
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -74,38 +76,18 @@ export default function TabLayout() {
   return (
     <ThemeProvider value={isDarkColorScheme ? DARK_THEME : LIGHT_THEME}>
       <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
-      <Tabs screenOptions={{ tabBarActiveTintColor: "#FF00C4" }}>
-        <Tabs.Screen
-          name="machine"
+      <Stack>
+        <Stack.Screen
+          name="login"
           options={{
-            title: "Máquinas",
-            headerShown: false,
-            tabBarIcon: ({ color }) => (
-              <Feather name="list" size={20} color={color} />
-            ),
+            headerTitle: "Login",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
           }}
         />
-        <Tabs.Screen
-          name="maintenance"
-          options={{
-            title: "Solicitações",
-            headerShown: false,
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="history" size={18} color={color} />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="inventory/index"
-          options={{
-            title: "Estoque",
-            headerRight: () => <ThemeToggle />,
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="tools" size={18} color={color} />
-            ),
-          }}
-        />
-      </Tabs>
+        <Stack.Screen name="(tabs)" options={{}} />
+      </Stack>
       <PortalHost />
     </ThemeProvider>
   );
