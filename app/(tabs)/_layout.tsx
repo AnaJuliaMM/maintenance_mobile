@@ -4,7 +4,7 @@ import "~/global.css";
 import { Tabs } from "expo-router";
 import { SplashScreen } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Platform } from "react-native";
+import { Platform, Text } from "react-native";
 
 // External Package imports
 import Feather from "@expo/vector-icons/Feather";
@@ -19,6 +19,9 @@ import { useColorScheme } from "~/lib/useColorScheme";
 import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
+import { Button } from "~/components/ui/button";
+import { useAuth } from "~/context/authContext";
+import { AuthProvider } from "~/context/authContext";
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -40,6 +43,7 @@ SplashScreen.preventAutoHideAsync();
 export default function TabLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false);
+  const { logout } = useAuth();
 
   React.useEffect(() => {
     (async () => {
@@ -99,7 +103,11 @@ export default function TabLayout() {
           name="inventory/index"
           options={{
             title: "Estoque",
-            headerRight: () => <ThemeToggle />,
+            headerRight: () => (
+              <Button className="bg-white" onPress={logout}>
+                <Text>Sair</Text>
+              </Button>
+            ),
             tabBarIcon: ({ color }) => (
               <FontAwesome5 name="tools" size={18} color={color} />
             ),

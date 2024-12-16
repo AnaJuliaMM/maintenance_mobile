@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { router } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 
 import AuthService from "~/services/authService";
@@ -56,6 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       await SecureStore.setItemAsync("user", JSON.stringify(jwtPayload));
     } catch (error) {
       console.error("Erro ao realizar login:", error);
+      throw error;
     }
   };
 
@@ -74,6 +76,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     await AuthService.logout();
     setUser({ username: "", role: null });
     await SecureStore.deleteItemAsync("user");
+    router.navigate("/");
   };
 
   useEffect(() => {
