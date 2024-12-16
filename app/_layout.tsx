@@ -78,7 +78,7 @@ export default function TabLayout() {
       <StatusBar style={isDarkColorScheme ? "light" : "dark"} />
       <Stack>
         <Stack.Screen
-          name="login"
+          name="index"
           options={{
             headerTitle: "Login",
             headerRight: () => <ThemeToggle />,
