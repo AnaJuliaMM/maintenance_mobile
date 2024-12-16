@@ -5,18 +5,12 @@ import { View, Image, ScrollView, ActivityIndicator } from "react-native";
 import { Text } from "~/components/ui/text";
 import { Switch } from "~/components/ui/switch";
 import { Label } from "~/components/ui/label";
-import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
 
 import CustomCard from "~/components/custom/CustomCard";
-import CustomTable from "~/components/custom/CustomTable";
 
 import MachineService from "~/services/machineService";
 import { machineType } from "~/type/machineType";
-
-import { MACHINES } from "~/lib/mock_data";
-import { MAINTENANCES } from "~/lib/mock_data";
-
 /**
  * Tela que exibe os detalhes de uma máquina com base no ID fornecido na URL.
  *
@@ -120,7 +114,7 @@ export default function DetalhesMaquina() {
         </Text>
         <Text>N° de Série: {machine?.serialNumber}</Text>
       </CustomCard>
-      <View className="flex flex-1 flex-col p-2 pt-8">
+      {/* <View className="flex flex-1 flex-col p-2 pt-8">
         <Text className="text-2xl font-bold">Manutenções Recentes</Text>
         <CustomTable
           rows={MAINTENANCES}
@@ -128,7 +122,7 @@ export default function DetalhesMaquina() {
           keys={["code", "title", "requisitionDate", "status"]}
           min_column_widths={[40, 10, 10]}
         />
-      </View>
+      </View> */}
 
       {/* <View className="flex flex-1 gap-8 pt-8">
         <Text className="font-bold text-2xl">Comentários</Text>

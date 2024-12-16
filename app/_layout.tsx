@@ -20,8 +20,6 @@ import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/ThemeToggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
 
-import Login from "./login";
-
 const LIGHT_THEME: Theme = {
   dark: false,
   colors: NAV_THEME.light,

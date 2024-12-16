@@ -89,16 +89,7 @@ export default function TabLayout() {
             ),
           }}
         />
-        <Tabs.Screen
-          name="maintenance"
-          options={{
-            title: "Solicitações",
-            headerShown: false,
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name="history" size={18} color={color} />
-            ),
-          }}
-        />
+
         <Tabs.Screen
           name="inventory/index"
           options={{
