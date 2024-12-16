@@ -81,12 +81,18 @@ export default function TabLayout() {
           name="login"
           options={{
             headerTitle: "Login",
+            headerRight: () => <ThemeToggle />,
             headerTitleStyle: {
               fontWeight: "bold",
             },
           }}
         />
-        <Stack.Screen name="(tabs)" options={{}} />
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
       <PortalHost />
     </ThemeProvider>

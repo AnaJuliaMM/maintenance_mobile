@@ -3,11 +3,22 @@ export type LoginType = {
   password: string;
 };
 
-export type AuthResponseType = {
-  token: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
+export type authType = {
+  username: string;
+  password: string;
 };
+
+export type JwtPayloadType = {
+  username: string;
+  role: userRole;
+  exp?: number;
+  iss?: string;
+  aud?: string;
+};
+
+export type userRole =
+  | "user:admin"
+  | "user:user"
+  | "user:viewer"
+  | "user:editor"
+  | null;
