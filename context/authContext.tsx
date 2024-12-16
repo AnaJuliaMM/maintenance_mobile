@@ -29,11 +29,10 @@ export const useAuth = (): AuthContextType => {
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const storedUser = SecureStore.getItem("user");
-
-  const [user, setUser] = useState<JwtPayloadType>(
-    storedUser ? JSON.parse(storedUser) : { username: "", role: null }
-  );
+  const [user, setUser] = useState<JwtPayloadType>({
+    username: "",
+    role: null,
+  });
 
   /**
    * Faz o login de um usuário usando seu email e senha.
@@ -42,7 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
    *
    * @async
    * @function
-   * @param {string} email - O endereço de email do usuário.
+   * @param {string} username - O endereço de email do usuário.
    * @param {string} password - A senha do usuário.
    * @returns {Promise<void>} Resolve quando a autenticação do usuário estiver completa e os dados do usuário estiverem armazenados de forma segura.
    *
