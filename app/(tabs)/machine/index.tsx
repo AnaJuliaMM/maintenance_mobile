@@ -1,14 +1,13 @@
-import * as React from "react";
-import { ScrollView } from "react-native";
+import React, { useState, useEffect } from "react";
+import { ActivityIndicator, ScrollView, View, Text } from "react-native";
 
-// Importação do pacote de roteamento do Expo
 import { router } from "expo-router";
 
-// Importação de um componente personalizado de tabela
 import CustomTable from "~/components/custom/CustomTable";
 
-// Importação de dados fictícios de máquinas para serem exibidos na tabela
-import { MACHINES } from "~/lib/mock_data";
+import MachineService from "~/services/machineService";
+import { machineType } from "~/type/machineType";
+import { Button } from "~/components/ui/button";
 
 /**
  * Componente principal da página.
@@ -18,7 +17,10 @@ import { MACHINES } from "~/lib/mock_data";
  * uma linha é pressionada.
  */
 export default function MaquinasScreen() {
-  
+  const [machines, setMachines] = useState<machineType[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
   /**
    * Função de navegação para a página de detalhes da máquina.
    *
@@ -32,20 +34,71 @@ export default function MaquinasScreen() {
     router.navigate({ pathname: "/machine/[id]", params: { id: id } });
   };
 
+  /**
+   * Função que faz a requisição para buscar as máquinas.
+   */
+  const fetchMachines = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await MachineService.get("");
+      setMachines(response);
+    } catch (err) {
+      setError("Erro ao buscar máquinas. Tente novamente.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMachines();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Carregando...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>{error}</Text>
+
+        <Button onPress={fetchMachines} className="bg-pink-600 text-white">
+          <Text>Tentar novamente</Text>
+        </Button>
+      </View>
+    );
+  }
+
   return (
-    // Componente de scroll para permitir rolagem vertical
     <ScrollView
-      alwaysBounceVertical={true} // Garante que o conteúdo tenha um "bounce" suave
-      bounces={false} // Desativa o "bounce" horizontal
-      showsHorizontalScrollIndicator={false} // Remove a barra de rolagem horizontal
+      alwaysBounceVertical={true}
+      bounces={false}
+      showsHorizontalScrollIndicator={false}
     >
-      {/* Componente de tabela personalizado que exibe os dados das máquinas */}
       <CustomTable
-        rows={MACHINES} // Define os dados das linhas da tabela com base nos dados importados
-        columns={["Nome", "Tipo", "Localização"]} // Define os títulos das colunas da tabela
-        keys={["serialNumber", "name", "type", "location"]} // Define as chaves dos dados a serem exibidos em cada coluna
-        min_column_widths={[40, 10, 10]} // Define a largura mínima de cada coluna
-        onPressRow={handlePressRow} // Função que será executada quando uma linha for pressionada
+        rows={machines.map((item) => {
+          const updatedItem = { ...item };
+
+          if (item.category) {
+            updatedItem["categoryName"] = item.category.name;
+          }
+          if (item.location) {
+            updatedItem["locationName"] = item.location.name;
+          }
+          return updatedItem;
+        })}
+        columns={["Nome", "Modelo", "Localização"]}
+        keys={["serialNumber", "name", "model", "locationName"]}
+        min_column_widths={[40, 10, 10]}
+        onPressRow={handlePressRow}
       />
     </ScrollView>
   );
