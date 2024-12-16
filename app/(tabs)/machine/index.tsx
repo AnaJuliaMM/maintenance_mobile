@@ -93,6 +93,7 @@ export default function MaquinasScreen() {
           if (item.location) {
             updatedItem["locationName"] = item.location.name;
           }
+
           return updatedItem;
         })}
         columns={["Nome", "Modelo", "Localização"]}

@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocalSearchParams } from "expo-router";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image, ScrollView, ActivityIndicator } from "react-native";
 
-// React Native Reusables components imports
 import { Text } from "~/components/ui/text";
 import { Switch } from "~/components/ui/switch";
 import { Label } from "~/components/ui/label";
 import { Textarea } from "~/components/ui/textarea";
 import { Button } from "~/components/ui/button";
 
-// Custom components imports
 import CustomCard from "~/components/custom/CustomCard";
 import CustomTable from "~/components/custom/CustomTable";
 
-// Mock data
+import MachineService from "~/services/machineService";
+import { machineType } from "~/type/machineType";
+
 import { MACHINES } from "~/lib/mock_data";
 import { MAINTENANCES } from "~/lib/mock_data";
 
@@ -26,16 +26,63 @@ import { MAINTENANCES } from "~/lib/mock_data";
  * @returns JSX.Element A tela de detalhes da máquina.
  */
 export default function DetalhesMaquina() {
-  // Estado local para controlar se um checkbox está marcado ou não.
-  const [checked, setChecked] = React.useState(false);
-  // Estado local para armazenar um valor de texto.
-  const [value, setValue] = React.useState("");
+  const [checked, setChecked] = useState(false);
 
-  // Obtém o ID da máquina a partir dos parâmetros da rota.
+  const [machine, setMachine] = useState<machineType>();
   const { id } = useLocalSearchParams();
 
-  // Lógica para buscar detalhes da máquina com o ID (pode ser de uma API, etc.)
-  const machine = MACHINES.filter((item) => item.serialNumber == id)[0];
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  /**
+   * Função que faz a requisição para buscar as máquinas.
+   */
+  const fetchMachine = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      let idParsed = Number(id);
+      console.log(idParsed);
+
+      const response = await MachineService.getById("", idParsed);
+      console.log(response);
+
+      setMachine(response);
+    } catch (err) {
+      setError("Erro ao buscar máquinas. Tente novamente.");
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMachine();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text>Carregando...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>{error}</Text>
+
+        <Button onPress={fetchMachine} className="bg-pink-600 text-white">
+          <Text>Tentar novamente</Text>
+        </Button>
+      </View>
+    );
+  }
+
+  console.log(machine);
 
   return (
     <ScrollView
@@ -60,15 +107,19 @@ export default function DetalhesMaquina() {
         />
       </View>
       <CustomCard
-        title={`${machine.name} ${machine.model}`}
-        description={machine.serialNumber}
+        title={`${machine?.name} ${machine?.model}`}
+        description={machine?.serialNumber}
       >
-        <Text>Tipo: {machine.type}</Text>
-        <Text>Localização: {machine.location}</Text>
-        <Text>Data de fabricação: {machine.manufactureDate}</Text>
-        <Text>N° de Série: {machine.serialNumber}</Text>
+        <Text>Tipo: {machine?.categoryName}</Text>
+        <Text>Localização: {machine?.locationName}</Text>
+        <Text>
+          Data de fabricação:{" "}
+          {machine?.manufactureDate
+            ? new Date(machine?.manufactureDate).toLocaleDateString()
+            : "Data não disponível"}
+        </Text>
+        <Text>N° de Série: {machine?.serialNumber}</Text>
       </CustomCard>
-
       <View className="flex flex-1 flex-col p-2 pt-8">
         <Text className="text-2xl font-bold">Manutenções Recentes</Text>
         <CustomTable
@@ -79,7 +130,7 @@ export default function DetalhesMaquina() {
         />
       </View>
 
-      <View className="flex flex-1 gap-8 pt-8">
+      {/* <View className="flex flex-1 gap-8 pt-8">
         <Text className="font-bold text-2xl">Comentários</Text>
         <Textarea
           placeholder="Adicione comentários"
@@ -90,7 +141,7 @@ export default function DetalhesMaquina() {
         <Button className="bg-blue-500">
           <Text>Enviar</Text>
         </Button>
-      </View>
+      </View> */}
     </ScrollView>
   );
 }
